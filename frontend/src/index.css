@@ -11,13 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-header{
-  background-color: #404040;
+.sit-container{
+  min-height: 100vh;
+}
+main{
   padding: 1rem;
 }
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
-header a{
-  color: #ffffff;
-  font-weight: bold;
-  text-decoration: none;
+}
+.star {
+  color: #ffc000;
+}
+.product{
+  margin:  1rem;
+}
+.product img{
+width: 100%;
+}
+.product-info{
+  padding: 1rem;
 }
