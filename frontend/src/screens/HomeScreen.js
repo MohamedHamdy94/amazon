@@ -5,6 +5,8 @@ import axios from 'axios'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import { Helmet } from 'react-helmet-async'
+import LoadingBox from '../components/LoadingBox'
+import MessageBox from '../components/MessageBox'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -14,6 +16,7 @@ const reducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return { ...state, products: action.payload, loading: false }
 
+      
     case 'FETCH_FAIL':
       return { ...state, error: action.payload, loading: false }
 
@@ -48,9 +51,8 @@ function HomeScreen() {
       </h1>
       <div className='products'>
         {
-          loading ? <div>loading...</div>
-            :
-            error ? <div>{error}</div>
+          loading ? (<LoadingBox />)
+            : error ? (<MessageBox variant='danger' error={error}>{error}</MessageBox>)
               : (
                 <Row>
                   {products.map(product => (
