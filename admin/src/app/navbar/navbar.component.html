@@ -1,11 +1,75 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
- </button>
- <span>welcome Admin</span>
- <span class="example-spacer"></span>
- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-   <!-- <mat-icon>favorite</mat-icon> -->
- </button>
- <button (click)="openDialog()" mat-raised-button color="primary">Add Product</button>
-
+<mat-toolbar id="nav">
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+ </button> -->
+  <span id="title">welcome Admin</span>
+  <button mat-raised-button (click)="logout()">logout</button>
+  <span class="example-spacer"></span>
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+ </button> -->
+  <a routerLink="/orders" class="btn">
+    <button mat-raised-button>Show Orders</button>
+  </a>
+  <a routerLink="/products" class="btn">
+    <button mat-raised-button>Show products</button>
+  </a>
+  <a routerLink="/users" class="btn">
+    <button mat-raised-button>Show Users</button>
+  </a>
+  <button (click)="openDialog()" mat-raised-button color="primary">
+    Add Product
+  </button>
 </mat-toolbar>
+
+<div class="loader-container" *ngIf="loader.Loading | async">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div>.</div>
+<div class="container">
+  <mat-card
+    class="card"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutWrap
+    fxLayoutGap="0.5%"
+    fxLayoutAlign="space-between"
+  >
+    <div>
+      <mat-card-title>Users</mat-card-title>
+      <mat-card-subtitle
+        ><strong> Users Number : </strong> {{ allInfo.users[0].numUsers }}
+      </mat-card-subtitle>
+    </div>
+
+    <div>
+      <mat-card-title>Orders</mat-card-title>
+      <mat-card-subtitle *ngIf="allInfo.orders.length > 0"
+        ><strong> Orders Number : </strong> {{ allInfo.orders[0].numOrders }}
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="allInfo.productCategories.length === 0"
+        ><strong> No Orders </strong></mat-card-subtitle
+      >
+      <mat-card-subtitle>
+        <strong> Orders Sales : </strong>
+        {{ allInfo.orders[0].totalSales.toFixed(2) | currency }}
+      </mat-card-subtitle>
+    </div>
+
+    <div>
+      <mat-card-title>Categories</mat-card-title>
+      <mat-card-subtitle *ngIf="allInfo.productCategories.length > 0">
+        <ul *ngFor="let categorie of allInfo.productCategories">
+          <li>
+            <strong> Categorie : </strong>
+
+            {{ categorie._id }}
+            <strong> count : </strong> {{ categorie.count }}
+          </li>
+        </ul>
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="allInfo.productCategories.length === 0">
+        <strong> No Category </strong>
+      </mat-card-subtitle>
+    </div>
+  </mat-card>
+</div>

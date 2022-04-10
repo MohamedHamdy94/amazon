@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddProductService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private auth : AuthService) {}
 
   // apiUrl = 'http://localhost:5000';
-  
+
   getProduct() {
     return this.http.get<any>(`/api/products`);
   }
@@ -22,5 +23,4 @@ export class AddProductService {
   deleteProduct(data:any ) {
     return this.http.delete<any>(`/api/products/${data._id}`,data);
   }
-  
 }

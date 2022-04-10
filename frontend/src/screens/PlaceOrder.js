@@ -64,8 +64,8 @@ function PlaceOrder() {
             ctxDispatch({ type: 'CART_CLEAR' });
             dispatch({ type: 'CREAT_SUCCESS' });
             localStorage.removeItem('cartItems');
-            navigate(`/order/${data.order._id}`)
-
+            // navigate(`/order/${data.order._id}`)
+            toast.success("order saved")
         } catch (err) {
             dispatch({ type: 'CREAT_FAIL' });
             toast.error(getError(err))

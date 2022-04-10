@@ -7,6 +7,8 @@ import productRouter from "./routes/productRoute.js";
 import userRouter from "./routes/usersRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import cors from "cors";
+import adminRouter from "./routes/adminRoutes.js";
+
 
 
 dotenv.config();
@@ -15,9 +17,10 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 }).catch((err) => {
     console.log(err.message)
 })
+
 const app = express();
 
-// app.use(cors()) ;
+app.use(cors()) ;
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }))
@@ -25,13 +28,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/orders', orderRouter);
-
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message })
 })
 const port = process.env.PORT || 5000;
+
 
 app.listen(port, () => {
     console.log(`server at http://localhost:${port}`);

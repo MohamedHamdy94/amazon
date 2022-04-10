@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,18 +14,32 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { OrdersComponent } from './orders/orders.component';
+import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './login/login.component';
+import { UsersComponent } from './users/users.component';
+import { UserChildComponent } from './user-child/user-child.component';
+import { RequestInterceptor } from './request.interceptor';
+import { AuthService } from './shared/auth.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     DialogComponent,
-    ProductsComponent
+    ProductsComponent,
+    OrdersComponent,
+    LoginComponent,
+    UsersComponent,
+    UserChildComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +57,17 @@ import {MatSortModule} from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatProgressBarModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,
+  useClass:RequestInterceptor ,
+  multi:true
+  }
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

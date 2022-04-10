@@ -16,7 +16,8 @@
       <mat-select formControlName="category"  placeholder="Category">
         <mat-option  value=" laptop">laptop</mat-option>
         <mat-option  value=" Mobail">Mobail</mat-option>
-        <mat-option  value=" tablet">tablet</mat-option>
+        <mat-option  value=" Watches">Watches</mat-option>
+        <mat-option  value=" Earbuds">Earbuds</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -60,7 +61,7 @@
 </form>
 </div>
 <div mat-dialog-actions [align]="'end'">
-  <button mat-raised-button color="warn" mat-dialog-close="">close</button>
+  <button mat-raised-button color="warn" mat-dialog-close>close</button>
   <button mat-raised-button color="primary" (click)="addProduct()" >{{actionButn}}</button>
 
 </div>

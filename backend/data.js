@@ -1,6 +1,13 @@
 import becrypt from "bcryptjs"
 
 const data = {
+    admin: [
+        {
+            name: 'Mohamed Hamdy',
+            email: "mohamedhamdy@gmail.com",
+            password: becrypt.hashSync("01125594521"),
+        }
+    ],
     users: [
         {
             name: 'Mohamed Hamdy',
@@ -13,7 +20,19 @@ const data = {
             email: 'ahmedhamdy@gmail.com',
             password: becrypt.hashSync('01125594521'),
             isAdmin:false
-        }
+        },
+        {
+            name: 'Mohamed',
+            email: "mohamed@gmail.com",
+            password: becrypt.hashSync("01125594521"),
+            isAdmin:true
+        },
+        {
+            name: 'Hamdy',
+            email: 'hamdy@gmail.com',
+            password: becrypt.hashSync('01125594521'),
+            isAdmin:false
+        },
     ],
     products: [
         {
