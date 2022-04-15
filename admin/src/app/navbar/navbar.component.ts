@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
     users:[{_id: '',numUsers:0}],
   };
 
+
   constructor(
     private dialog: MatDialog,
     private api: AddProductService,
@@ -53,8 +54,6 @@ export class NavbarComponent implements OnInit {
       next: (res) => {
         console.log(res);
         console.log(res.productCategories);
-        console.log(res.productCategories[0]._id);
-
         console.log(res.users[0]);
         console.log(res.orders);
 

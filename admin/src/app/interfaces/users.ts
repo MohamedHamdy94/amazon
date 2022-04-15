@@ -1,5 +1,5 @@
 export interface Users {
-users:{    name :String,
+  name :String,
     email :String,
     password :String,
     isAdmin:  Boolean,
@@ -10,4 +10,4 @@ users:{    name :String,
     _id:String,}[]
 
 
-}
+

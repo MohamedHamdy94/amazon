@@ -1,6 +1,4 @@
 export interface Products {
-  products:{
-
     name: String;
     slug: String;
     image: String;
@@ -11,5 +9,4 @@ export interface Products {
     countInStock: Number;
     rating: Number;
     numReviews: Number;
-  }[]
-}
+}[]

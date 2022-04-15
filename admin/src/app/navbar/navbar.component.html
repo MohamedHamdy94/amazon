@@ -20,10 +20,11 @@
     Add Product
   </button>
 </mat-toolbar>
-
+<!--                Loading                 -->
 <div class="loader-container" *ngIf="loader.Loading | async">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
+
 <div>.</div>
 <div class="container">
   <mat-card
@@ -32,44 +33,58 @@
     fxLayout.xs="column"
     fxLayoutWrap
     fxLayoutGap="0.5%"
-    fxLayoutAlign="space-between"
+    fxLayoutAlign="space-around"
   >
     <div>
       <mat-card-title>Users</mat-card-title>
-      <mat-card-subtitle
-        ><strong> Users Number : </strong> {{ allInfo.users[0].numUsers }}
+      <mat-card-subtitle>
+        <strong> Users Number : </strong>
+        <span *ngIf="allInfo.users[0]">{{ allInfo.users[0].numUsers }} </span>
+        <span *ngIf="!allInfo.users[0]">No users found</span>
       </mat-card-subtitle>
     </div>
 
     <div>
       <mat-card-title>Orders</mat-card-title>
-      <mat-card-subtitle *ngIf="allInfo.orders.length > 0"
-        ><strong> Orders Number : </strong> {{ allInfo.orders[0].numOrders }}
+      <mat-card-subtitle
+        ><strong> Orders Number : </strong>
+        <span *ngIf="allInfo.orders[0]">{{ allInfo.orders[0].numOrders }}</span>
+        <span *ngIf="!allInfo.orders[0]">No Orders found</span>
+        <!-- {{ allInfo.orders[0].numOrders }} -->
       </mat-card-subtitle>
-      <mat-card-subtitle *ngIf="allInfo.productCategories.length === 0"
-        ><strong> No Orders </strong></mat-card-subtitle
-      >
+
       <mat-card-subtitle>
         <strong> Orders Sales : </strong>
-        {{ allInfo.orders[0].totalSales.toFixed(2) | currency }}
+        <span *ngIf="allInfo.orders[0]"
+          >{{ allInfo.orders[0].totalSales.toFixed(2) | currency }}
+        </span>
+        <span *ngIf="!allInfo.orders[0]">No Sales found</span>
+        <!-- {{ allInfo.orders[0].totalSales.toFixed(2) | currency }} -->
       </mat-card-subtitle>
     </div>
 
     <div>
       <mat-card-title>Categories</mat-card-title>
-      <mat-card-subtitle *ngIf="allInfo.productCategories.length > 0">
+      <mat-card-subtitle *ngIf="allInfo.productCategories[0]">
         <ul *ngFor="let categorie of allInfo.productCategories">
-          <li>
+          <li >
             <strong> Categorie : </strong>
-
-            {{ categorie._id }}
+            <span> {{ categorie._id }}</span>
             <strong> count : </strong> {{ categorie.count }}
           </li>
+          <li *ngIf="!allInfo.productCategories[0]">No Categories found</li>
         </ul>
       </mat-card-subtitle>
-      <mat-card-subtitle *ngIf="allInfo.productCategories.length === 0">
-        <strong> No Category </strong>
+      <mat-card-subtitle *ngIf="!allInfo.productCategories[0]">
+        <ul>
+          <li >
+
+            <strong> Categorie :</strong> No Categorie found
+          </li>
+        </ul>
+
       </mat-card-subtitle>
+
     </div>
   </mat-card>
 </div>

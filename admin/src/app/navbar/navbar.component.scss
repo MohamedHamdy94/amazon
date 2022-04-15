@@ -7,11 +7,9 @@
 #nav{
   display :flex ;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px;
   margin:  10px;
-
-}
+  justify-content: space-around;}
 .loader-container{
 width: 100%;
 z-index:99;

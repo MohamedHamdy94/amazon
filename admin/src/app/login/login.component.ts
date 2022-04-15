@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  resData:any;
+  Data:any;
   ngOnInit(): void {
-    if (localStorage.getItem('userInfo')) {
-      this.router.navigate(['products']);
+    if (localStorage.getItem('token')) {
+    this.router.navigate(['products']);
     }
     this.loginForm = this.fb.group({
       email: ['', [
@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
         result => {
           if(result!=null){
 
-            this.resData=result
-            localStorage.setItem('token', this.resData.token);
+            this.Data=result
+            localStorage.setItem('token', this.Data.token);
             console.log(result);
-            console.log(this.resData.token);
+            console.log(this.Data.token);
 
             this.router.navigate(['products']);
           }

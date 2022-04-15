@@ -9,9 +9,8 @@ export class AddProductService {
   constructor(private http: HttpClient,private auth : AuthService) {}
 
   // apiUrl = 'http://localhost:5000';
-
   getProduct() {
-    return this.http.get<any>(`/api/products`);
+    return this.http.get<any>(`/api/products/all`);
   }
   postProduct(data: any) {
     return this.http.post<any>('/api/products/add', data);

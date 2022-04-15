@@ -36,9 +36,9 @@ export class UsersComponent implements OnInit {
   }
   getAllusers() {
     this.api.getusers().subscribe({
-      next: (res:Users) => {
+      next: (res:Users[]) => {
         console.log(res);
-        this.dataSource = new MatTableDataSource(res.users);
+        this.dataSource = new MatTableDataSource(res);
 
         this.dataSource.paginator = this.paginator;
 
@@ -50,6 +50,7 @@ export class UsersComponent implements OnInit {
       },
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

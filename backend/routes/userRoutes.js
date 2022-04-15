@@ -1,20 +1,13 @@
-import express from 'express';
-import User from '../models/userModel.js';
-import bcrypt from 'bcryptjs';
-import { generateToken, isAdminAuth } from '../utils.js';
-import expressAsyncHandler from 'express-async-handler';
-
+import express from "express";
+import User from "../models/userModel.js";
+import { generateToken, isAdminAuth, isAuth } from "../utils.js";
+import expressAsyncHandler from "express-async-handler";
+import bcrypt from "bcryptjs";
+import productRouter from "./productRoutes.js";
 const userRouter = express.Router();
 
-//   userRouter.get('/:id', async (req, res) => {
-//     const user = await User.findById(req.params.id)
-// console.log(req.params.id)
-// console.log(user)
-//   res.send(user);
-// });
-
 userRouter.post(
-  '/signin',
+  "/signin",
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
@@ -26,16 +19,16 @@ userRouter.post(
           isAdmin: user.isAdmin,
           token: generateToken(user),
         });
+        return;
       }
     }
-    res.status(401).send({ message: 'Invalid email or password' });
+    res.status(401).send({ message: "Invalid email or password" });
   })
 );
-
 userRouter.post(
-  '/signup',
-  expressAsyncHandler(async (req, res) => {
-    const newUser = new User({
+  "/signup",
+  expressAsyncHandler(async (req, res, next) => {
+    const newUser = await new User({
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
@@ -48,14 +41,12 @@ userRouter.post(
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });
-  })
-);
-
+  }));
 
 userRouter.get('/',  isAdminAuth,
 expressAsyncHandler (async (erq, res) => {
   const users = await User.find();
-  res.send({ users });
+  res.send( users );
 }));
 userRouter.get(
   `/:id`,
@@ -81,5 +72,6 @@ userRouter.delete(
     }
   })
 );
+
 
 export default userRouter;

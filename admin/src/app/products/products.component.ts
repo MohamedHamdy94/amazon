@@ -60,11 +60,12 @@ getAllinfo() {
   });
 }
 
+
   getAllProducts() {
     this.api.getProduct().subscribe({
-      next: (res:Products) => {
+      next: (res:Products[]) => {
         console.log(res);
-        this.dataSource = new MatTableDataSource(res.products);
+        this.dataSource = new MatTableDataSource(res);
 
         this.dataSource.paginator = this.paginator;
 
@@ -75,7 +76,7 @@ getAllinfo() {
         alert('error whil get all product');
       },
     });
-    
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

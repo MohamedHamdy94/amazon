@@ -1,18 +1,16 @@
 import express from "express";
-import data from "../data.js";
-import Admin from "../models/adminModel.js";
 import Product from "../models/productModel.js";
+import data from "../data.js";
 import User from "../models/userModel.js";
-
-const seedRouter=express.Router();
-
-seedRouter.get('/',async(erq,res)=>{
-    await Product.remove({});
-    const createdProducts =await Product.insertMany(data.products);
-    await Admin.remove({});
-    const createdAdmin=await Admin.insertMany(data.admin);
-    await User.remove({});
-    const createdUsers =await User.insertMany(data.users);
-    res.send({createdProducts,createdUsers ,createdAdmin});
+import Admin from "../models/adminModel.js";
+const seedRouter = express.Router();
+seedRouter.get("/", async (req, res) => {
+  await Product.remove({});
+  const createProducts = await Product.insertMany(data.products);
+  await Admin.remove({});
+  const createdAdmin=await Admin.insertMany(data.admin);
+  await User.remove({});
+  const createUsers = await User.insertMany(data.users);
+  res.send({createProducts, createUsers ,createdAdmin });
 });
 export default seedRouter;

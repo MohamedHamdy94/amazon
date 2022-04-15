@@ -21,19 +21,17 @@ export class RequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     let token = this.auth.getToken();
-
     console.log(token);
     let jwtToken = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
       },
-    }); 
+    });
        this.loaderService.Loading.next(true);
     return next.handle(jwtToken).pipe(
-      finalize(() => 
+      finalize(() =>
         this.loaderService.Loading.next(false) )
     );
-
     // return next.handle(request);
   }
 }
