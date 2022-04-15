@@ -98,11 +98,11 @@ getAllinfo() {
         if (val === 'update') {
           // this.getAllProducts();
           window.location.reload() ;
-
         }
       });
   }
 
+  
   delete(row: any) {
     this.api.deleteProduct(row).subscribe(
 
