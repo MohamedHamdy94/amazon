@@ -39,3 +39,4 @@ A Simple admin dashbord
 	npm start
 ```
 
+admin  https://admmin.herokuapp.com/users

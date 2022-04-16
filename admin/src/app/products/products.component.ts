@@ -16,7 +16,6 @@ import { Products } from '../interfaces/products';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  allInfo: any;
   products: string[]  = [
     'image',
     'name',
@@ -47,18 +46,9 @@ export class ProductsComponent implements OnInit {
     // console.log(this.auth.IsLogin().token);
 
     this.getAllProducts();
-    this.getAllinfo()
   }
 
-getAllinfo() {
-  this.apiOrder.getInfo().subscribe({
-    next: (res) => {
-      console.log(res);
-      this.allInfo = res;
-      console.log(this.allInfo);
-    },
-  });
-}
+
 
 
   getAllProducts() {
@@ -102,7 +92,7 @@ getAllinfo() {
       });
   }
 
-  
+
   delete(row: any) {
     this.api.deleteProduct(row).subscribe(
 
