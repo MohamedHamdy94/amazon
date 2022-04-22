@@ -1,47 +1,51 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import Card from "react-bootstrap/Card"
-import Button from "react-bootstrap/Button"
-import Rating from './Rating';
-import axios from 'axios';
-import { Store } from '../store';
+import React, { useContext } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
+import { Store } from "../Store";
+import axios from "axios";
 
-function Product(props) {
-    const { product } = props;
-    const { state, dispatch: ctxDispatch } = useContext(Store)
-    const { cart: { cartItems } } = state;
-
-    const addToCartHandler = async (item) => {
-        const existItem = cartItems.find((x) => x._id === product._id)
-        const quantity = existItem ? existItem.quantity + 1 : 1;
-
-        const { data } = await axios.get(`/api/products/${item._id}`);
-        if (data.countInStock < quantity) {
-            window.alert('sorry. product is out of stock')
-            return
-        }
-        ctxDispatch({
-            type: 'CART_ADD_ITEM'
-            , payload: { ...item, quantity }
-        });
-
+export default function Product(props) {
+  const { products } = props;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === products._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${products._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry, product out of stock");
+      return;
     }
-    return (
-        <Card className="product card" key={product.slug}>
-            <Link to={`/api/products/slug/${product.slug}`}>
-                <img className='card-img-top' src={product.image} alt={product.name} />
-            </Link>
-            <Card.Body className='product-info'>
-                <Link to={`/api/products/slug/${product.slug}`}>
-                    <Card.Title>{product.name}</Card.Title>
-                </Link>
-                    <Rating rating={product.rating} numReviews={product.numReviews}></Rating>
-                <Card.Text>$ <strong>{product.price}</strong></Card.Text>
-                {product.countInStock === 0 ? <Button variant='light' disabled>Out of stock</Button>
-                    : <Button onClick={() => addToCartHandler(product)} >Add to cart</Button>
-                }
-            </Card.Body>
-        </Card>)
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...products, quantity },
+    });
+  };
+  return (
+    <Card key={products.slug}>
+      <Link to={`/product/${products.slug}`}>
+        <img
+          src={products.image}
+          alt={products.name}
+          className="card-img-top"
+        />
+      </Link>
+      <Card.Body>
+        <Link to={`/product/${products.slug}`}>
+          <Card.Title>{products.name}</Card.Title>
+        </Link>
+        <Rating rating={products.rating} numReviews={products.numReviews} />
+        <Card.Text>$ {products.price}</Card.Text>
+        {products.countInStock === 0 ? (
+          <Button variant="light" disabled>
+            out of stock
+          </Button>
+        ) : (
+          <Button onClick={addToCartHandler}>add to card</Button>
+        )}
+      </Card.Body>
+    </Card>
+  );
 }
-
-export default Product

@@ -21,6 +21,7 @@ export class RequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     let token = this.auth.getToken();
+
     console.log(token);
     let jwtToken = request.clone({
       setHeaders: {
@@ -32,6 +33,7 @@ export class RequestInterceptor implements HttpInterceptor {
       finalize(() =>
         this.loaderService.Loading.next(false) )
     );
+
     // return next.handle(request);
   }
 }

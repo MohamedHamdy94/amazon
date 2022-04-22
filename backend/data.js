@@ -24,7 +24,7 @@ const data = {
       name: 'David Zaky',
       email: 'user2@example.com',
       password: bcrypt.hashSync('123456'),
-      isAdmin: false,
+      isAdmin: true,
     },
     {
       name: 'Mohamed Said',
@@ -34,7 +34,6 @@ const data = {
     },
   ],
   products: [
-   
     {
       //_id:'1',
       name: 'laptop hp',
