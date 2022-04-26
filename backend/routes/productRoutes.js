@@ -239,7 +239,6 @@ productRouter.put(
     const product = await Product.findById(req.params.id);
     if (product) {
       req.body.image = 'http://localhost:5000/images/' + req.file.filename;
-
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         slug: req.body.slug,
@@ -249,7 +248,7 @@ productRouter.put(
         countInStock: req.body.countInStock,
         brand: req.body.brand,
         rating: req.body.rating,
-        numReviews: req.body.numReviews,
+        // numReviews: req.body.numReviews,
         description: req.body.description,
       });
       res.status(201).send({
@@ -257,7 +256,6 @@ productRouter.put(
     } else {
       res.status(404).send({ message: 'product not found' });
     }
-
   })
 );
 

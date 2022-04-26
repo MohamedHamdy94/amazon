@@ -20,10 +20,11 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
-    rating: { type: Number, required: true },
+    rating: { type: Number,  default:0  },
     numReviews: { type: Number, default:0 },
     // uploaded: { type: Date, default: Date.now },
 
+    
     reviews: [reviewSchema],
   },
   {

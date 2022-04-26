@@ -11,19 +11,17 @@
         {{ order.shippingAddress.country }},
       </div>
       <div>
-        <div>
-          <strong>Usaer Name : </strong>{{user.name}}
-        </div>
-        <div>
-          <strong>Usaer Email : </strong>{{user.email}}
 
-        </div>
+        <!-- <div>
+          <strong>User Email : </strong>{{user.email}}
+
+        </div> -->
       </div>
       <span *ngIf="order.isDelivered">
         <strong> Delivered At : </strong>
         {{ order.deliveredAt | date: "medium" }}
       </span>
-  
+
 
       <mat-chip-list
         *ngIf="!order.isDelivered"
@@ -60,7 +58,7 @@
           <th>Price</th>
 
         </tr>
-        
+
           <tr *ngFor="let categorie of order.orderItems">
             <td><img src="{{ categorie.image }}" alt="{{ categorie.image }}"></td>
             <td>{{ categorie.name }}</td>
@@ -127,7 +125,7 @@
       <button (click)="notDelivered(order)" *ngIf="order.isDelivered" mat-flat-button color="warn">
         Not Delivered
       </button>
-      <button mat-flat-button color="warn" (click)="deleteOrder(order)">Delelet</button>
+      <!-- <button mat-flat-button color="warn" (click)="deleteOrder(order)">Delelet</button> -->
     </mat-card>
   </div>
 </div>

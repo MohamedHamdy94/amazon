@@ -40,7 +40,7 @@ export class AddProductService {
     formData.append('price', data.price);
     formData.append('countInStock', data.countInStock);
     formData.append('brand', data.brand);
-    formData.append('rating', data.rating);
+    // formData.append('rating', data.rating);
     formData.append('description', data.description);
     return this.http.post<any>('/api/products/add', formData);
   }

@@ -57,7 +57,7 @@ export class OrderDetailsComponent implements OnInit {
     updatedAt: new Date(),
     _id: '',
   };
-  
+
   user: User ={
     name :'',
       email :'',
@@ -99,28 +99,29 @@ export class OrderDetailsComponent implements OnInit {
       console.log(res);
 
       this.order = res;
+
       this.getUser(this.order.user);
 
     });
   }
 
-  deleteOrder(order: any) {
-    this.dailogService
-      .openConfirmDialog('Are you sure to delete this Order ?')
-      .afterClosed()
-      .subscribe((res) => {
-        console.log(res);
-        if (res) {
-          this.api.deleteOrders(order).subscribe(
-            (res) => {},
-            (error) => {
-              alert('Error Orders not deleted');
-            }
-          );
-          window.location.reload();
-        }
-      });
-  }
+  // deleteOrder(order: any) {
+  //   this.dailogService
+  //     .openConfirmDialog('Are you sure to delete this Order ?')
+  //     .afterClosed()
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       if (res) {
+  //         this.api.deleteOrders(order).subscribe(
+  //           (res) => {},
+  //           (error) => {
+  //             alert('Error Orders not deleted');
+  //           }
+  //         );
+  //         window.location.reload();
+  //       }
+  //     });
+  // }
 
   delivered(order: any) {
     this.api.deliverd(order).subscribe(

@@ -16,7 +16,9 @@ import { DailogService } from '../shared/dailog.service';
 })
 export class OrdersComponent implements OnInit {
   // Orders: Orders;
-  showOrder: any = ["name",'date', 'total','paid','delivered', 'details','deleted'];
+  showOrder: any = ["name",'date', 'total','paid','delivered', 'details'
+  // ,'deleted'
+];
   // showOrder: Object[] = [{shippingAddress:{fullName:"name"},createdAt:'date',totalPrice: 'total',paidAt:'paid',isDelivered:'delivered', action:'action'}];
 
   dataSource!: MatTableDataSource<any>;
@@ -116,23 +118,23 @@ orderDitails(order:any){
     });
   }
 
-  deleteOrder(order: any) {
+  // deleteOrder(order: any) {
 
-    this.dailogService.openConfirmDialog("Are you sure to delete this Order ?").afterClosed().subscribe(res =>{
-      console.log(res)
-      if(res){
-    this.api.deleteOrders(order).subscribe(
-      (res) => {
+  //   this.dailogService.openConfirmDialog("Are you sure to delete this Order ?").afterClosed().subscribe(res =>{
+  //     console.log(res)
+  //     if(res){
+  //   this.api.deleteOrders(order).subscribe(
+  //     (res) => {
 
-      },
-      (error) => {
-        alert('Error Orders not deleted');
-      }
-    );
-    window.location.reload();
-      }
-    })
-  }
+  //     },
+  //     (error) => {
+  //       alert('Error Orders not deleted');
+  //     }
+  //   );
+  //   window.location.reload();
+  //     }
+  //   })
+  // }
 
   getUser(order: any) {
     this.userApi.userInfo(order).subscribe(

@@ -61,7 +61,7 @@ export class DialogComponent implements OnInit {
       price: ['', Validators.required],
       countInStock: ['', Validators.required],
       brand: ['', Validators.required],
-      rating: [null, [Validators.required, Validators.max(5)]],
+      // rating: [null, [Validators.required, Validators.max(5)]],
       //  numReviews: ['', Validators.required] ,
       description: ['', Validators.required],
     });
@@ -78,7 +78,7 @@ export class DialogComponent implements OnInit {
         this.editData.countInStock
       );
       this.protectForm.controls['brand'].setValue(this.editData.brand);
-      this.protectForm.controls['rating'].setValue(this.editData.rating);
+      // this.protectForm.controls['rating'].setValue(this.editData.rating);
       // this.protectForm.controls['numReviews'].setValue(
       //   this.editData.numReviews
       // );
@@ -87,6 +87,8 @@ export class DialogComponent implements OnInit {
       );
     }
   }
+
+  // (change)="onFileSelect($event)"
 
   onFileSelect(event: any) {
     this.imageData = null;
@@ -101,7 +103,7 @@ export class DialogComponent implements OnInit {
       reader.readAsDataURL(file);
     }else{
       this.protectForm.controls['image'].reset();
-            
+
       this.dailogService
       .openConfirmDialog("Please choose an image")
 
@@ -115,10 +117,10 @@ export class DialogComponent implements OnInit {
 
   addProduct() {
     console.log(this.protectForm.value);
-    console.log(this.protectForm.get('image')?.value._fileNames);
+    console.log(this.protectForm.get('image')?.value);
     if (!this.editData) {
       if (this.protectForm.valid) {
-        
+
         const imgFil: File = this.protectForm.get('image')?.value._files[0];
         this.api.postProduct(this.protectForm.value, imgFil).subscribe(
           (res) => {
@@ -134,8 +136,7 @@ export class DialogComponent implements OnInit {
           }
         );
       } else {
-        this.dailogService
-        .openConfirmDialog("form not valid")
+        alert('form not valid');
       }
     } else {
       this.updateProduct();
@@ -156,8 +157,7 @@ export class DialogComponent implements OnInit {
           window.location.reload();
         });
     } else {
-      this.dailogService
-      .openConfirmDialog("form not valid")
+      alert('form not valid');
     }
   }
 }

@@ -1,25 +1,19 @@
 {
+  "dependencies": {
+    "@paypal/react-paypal-js": "^7.6.0",
+    "cors": "^2.8.5",
+    "react-router-dom": "^6.2.2"
+  },
   "name": "amazon",
   "version": "1.0.0",
-  "description": "A Simple e-commerce website",
   "main": "index.js",
+  "devDependencies": {},
   "scripts": {
-    "build": "cd backend && npm install && cd ../admin && npm install && npm run build",
+    "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
     "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MohamedHamdy94/amazon.git"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MohamedHamdy94/amazon/issues"
-  },
-  "homepage": "https://github.com/MohamedHamdy94/amazon#readme",
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^13.3.3"
-  }
+  "description": ""
 }
