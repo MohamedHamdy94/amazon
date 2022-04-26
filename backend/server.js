@@ -30,7 +30,7 @@ mongoose
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
+app.use(express.static(path.join(__dirname, '/admin/dist/admin/assets')));
 app.get('*',(req,res)=> res.sendFile(path.join(__dirname,'/admin/dist/admin/index.html')))
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
