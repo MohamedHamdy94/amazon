@@ -11,6 +11,7 @@ import adminRouter from './routes/adminRoutes.js';
 import path from 'path';
 
 dotenv.config();
+app.use(cors());
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -29,9 +30,8 @@ mongoose
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
-
+app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
+app.get('*',(req,res)=> res.sendFile(path.join(__dirname,'/admin/dist/admin/index.html')))
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
