@@ -11,27 +11,29 @@ import adminRouter from './routes/adminRoutes.js';
 import path from 'path';
 
 dotenv.config();
+const app = express();
 app.use(cors());
+app.use(express.static('public'));
+
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+  })
   .then(() => {
     console.log('connected to db');
   })
+
   .catch((err) => {
     console.log(err.message);
   });
-
-  const __dirname = path.resolve();
-
-
-const app = express();
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/admin/dist/admin/assets')));
-app.get('*',(req,res)=> res.sendFile(path.join(__dirname,'/admin/dist/admin/index.html')))
+app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
+// app.get('*',(req, res) =>
+//   res.sendFile(path.join(__dirname, '/admin/dist/admin/index.html'))
+// );
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });

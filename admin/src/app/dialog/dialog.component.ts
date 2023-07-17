@@ -88,8 +88,6 @@ export class DialogComponent implements OnInit {
     }
   }
 
-  // (change)="onFileSelect($event)"
-
   onFileSelect(event: any) {
     this.imageData = null;
     const file: any = event.target.files[0];
@@ -117,11 +115,11 @@ export class DialogComponent implements OnInit {
 
   addProduct() {
     console.log(this.protectForm.value);
-    console.log(this.protectForm.get('image')?.value);
     if (!this.editData) {
       if (this.protectForm.valid) {
 
         const imgFil: File = this.protectForm.get('image')?.value._files[0];
+        console.log(File);
         this.api.postProduct(this.protectForm.value, imgFil).subscribe(
           (res) => {
             this.protectForm.reset();
@@ -136,7 +134,8 @@ export class DialogComponent implements OnInit {
           }
         );
       } else {
-        alert('form not valid');
+        this.dailogService
+        .openConfirmDialog("form not valid")
       }
     } else {
       this.updateProduct();
@@ -148,6 +147,7 @@ export class DialogComponent implements OnInit {
     console.log(this.protectForm.value);
     if (this.protectForm.valid) {
       const imgFil: File = this.protectForm.get('image')?.value._files[0];
+      console.log(imgFil);
 
       this.api
         .putProduct(this.protectForm.value, this.editData, imgFil)
@@ -157,7 +157,8 @@ export class DialogComponent implements OnInit {
           window.location.reload();
         });
     } else {
-      alert('form not valid');
+      this.dailogService
+      .openConfirmDialog("form not valid")
     }
   }
 }

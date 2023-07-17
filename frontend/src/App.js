@@ -40,6 +40,7 @@ import {
 } from "./components/styles/GlobalStyles";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 
+
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;

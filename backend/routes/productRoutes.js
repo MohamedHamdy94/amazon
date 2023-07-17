@@ -238,6 +238,7 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
+
       req.body.image = 'http://localhost:5000/images/' + req.file.filename;
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
@@ -247,7 +248,7 @@ productRouter.put(
         price: req.body.price,
         countInStock: req.body.countInStock,
         brand: req.body.brand,
-        rating: req.body.rating,
+        // rating: req.body.rating,
         // numReviews: req.body.numReviews,
         description: req.body.description,
       });

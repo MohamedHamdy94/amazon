@@ -6,6 +6,7 @@ import Rating from "./Rating";
 import { Store } from "../Store";
 import axios from "axios";
 
+
 export default function Product(props) {
   const { products } = props;
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -29,7 +30,7 @@ export default function Product(props) {
         <img
           src={products.image}
           alt={products.name}
-          className="card-img-top"
+          className="card-img-top" 
         />
       </Link>
       <Card.Body>
